@@ -87,6 +87,8 @@ cmp.setup({
 local nvim_lsp = require("lspconfig")
 local configs = require("lspconfig.configs")
 
+nvim_lsp.lua_ls.setup({})
+
 nvim_lsp.tsserver.setup({
   -- capabilities = capabilities,
   -- on_attach = on_attach,

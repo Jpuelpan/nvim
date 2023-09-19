@@ -1,7 +1,6 @@
 -- Neovim config
 
 -- Options
-
 vim.opt.exrc = true
 vim.opt.secure = true
 vim.opt.completeopt = "menu,menuone,noselect"
@@ -67,7 +66,7 @@ vim.opt.undodir = ".undo"
 vim.api.nvim_set_keymap("n", "<space>", "<nop>", { noremap = true })
 vim.g.mapleader = " "
 
--- Pugins
+-- Plugins
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -183,10 +182,19 @@ require("lazy").setup({
 
   {
     "nvim-telescope/telescope.nvim",
+    dependencies = {
+      {
+          "nvim-telescope/telescope-live-grep-args.nvim" ,
+          version = "^1.0.0",
+      },
+    },
     config = function()
       local actions = require("telescope.actions")
+      local telescope = require("telescope")
 
-      require("telescope").setup({
+      telescope.load_extension("live_grep_args")
+
+      telescope.setup({
         defaults = {
           --layout_config = {
           --  vertical = { width = 0.5 }
@@ -214,8 +222,8 @@ require("lazy").setup({
     end
   },
 
-  { 
-    "kylechui/nvim-surround", 
+  {
+    "kylechui/nvim-surround",
     event = "VeryLazy",
     config = function()
       require("nvim-surround").setup()
@@ -271,7 +279,7 @@ require("lazy").setup({
           --},
         },
         -- callback where you can add custom code when the Zen window opens
-        on_open = function(win)
+        on_open = function(_)
         end,
         -- callback where you can add custom code when the Zen window closes
         on_close = function()
@@ -296,8 +304,10 @@ vim.g.gruvbox_constrast_dark = "hard"
 -- vim.g.copilot_enabled = "v:false"
 
 -- Leader mappings
+local live_grep_args_shortcuts = require("telescope-live-grep-args.shortcuts")
+
 vim.api.nvim_set_keymap("n", "<leader><space>", ":nohl<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>*", ":Ggrep <c-r><c-w><cr>", { noremap = true, silent = false })
+vim.keymap.set("n", "<leader>*", live_grep_args_shortcuts.grep_word_under_cursor)
 
 -- Unmap arrow keys
 vim.api.nvim_set_keymap("n", "<up>", "<nop>", {})
