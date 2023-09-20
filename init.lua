@@ -24,6 +24,7 @@ vim.opt.shiftwidth = 2
 vim.opt.smarttab = true
 vim.opt.expandtab = true
 
+vim.opt.list = true
 vim.opt.listchars = { tab = "▸ ", trail = "·", eol = "¬", nbsp = "_" }
 vim.opt.hlsearch = true
 vim.opt.ignorecase = true
@@ -54,9 +55,7 @@ vim.opt.winbar = "%m %f"
 
 vim.opt.backupdir = ".backups"
 vim.opt.undodir = ".undo"
-
--- vim.opt.syntax = "off"
--- set list
+vim.opt.syntax = "off"
 -- "set fo-=t
 
 -- Mappings
