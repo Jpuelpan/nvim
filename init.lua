@@ -139,7 +139,6 @@ require("lazy").setup({
 		config = function()
 			vim.g.loaded_netrw = 1
 			vim.g.loaded_netrwPlugin = 1
-			require("nvim-tree").setup()
 		end,
 	},
 
@@ -285,7 +284,7 @@ require("lazy").setup({
 	},
 })
 
-vim.cmd("colorscheme gruvbox")
+vim.cmd([[colorscheme gruvbox]])
 vim.cmd("highligh Normal guibg=NONE ctermbg=NONE")
 vim.cmd("highligh clear SignColumn")
 vim.cmd("highlight ColorColumn ctermbg=black")

@@ -70,10 +70,10 @@ cmp.setup({
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()) --nvim-cmp
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-local on_attach = function(client, bufnr)
-	local function buf_set_keymap(...)
-		vim.api.nvim_buf_set_keymap(bufnr, ...)
-	end
+local on_attach = function(_, bufnr)
+	-- local function buf_set_keymap(...)
+	-- 	vim.api.nvim_buf_set_keymap(bufnr, ...)
+	-- end
 	local function buf_set_option(...)
 		vim.api.nvim_buf_set_option(bufnr, ...)
 	end
