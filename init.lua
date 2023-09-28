@@ -51,7 +51,7 @@ vim.opt.background = "dark"
 vim.opt.colorcolumn = "80"
 vim.opt.signcolumn = "yes:1"
 vim.opt.laststatus = 3
-vim.opt.winbar = "%m %f"
+-- vim.opt.winbar = "%m %f"
 
 vim.opt.backupdir = ".backups"
 vim.opt.undodir = ".undo"
@@ -295,6 +295,12 @@ vim.cmd("highligh LspReferenceText ctermbg=237 guibg=#303030")
 vim.cmd("highligh LspReferenceWrite ctermbg=237 guibg=#303030")
 vim.cmd("highligh DiagnosticError ctermfg=1 guifg=#f87171")
 
+-- Inactive buffer winbar
+vim.cmd("highligh WinBarNC guifg=#ffffff guibg=default")
+
+-- Active buffer winbar
+vim.cmd("highligh WinBar guifg=#000000 guibg=#ffffff")
+
 vim.g.gruvbox_constrast_dark = "hard"
 -- vim.g.copilot_enabled = "v:false"
 
@@ -373,3 +379,45 @@ vim.keymap.set("n", "tn", ":tabnew<CR>", { noremap = true, silent = true })
 
 -- Nvim tree
 vim.keymap.set("", "<c-e>", ":NvimTreeFindFileToggle<CR>", { silent = true })
+
+local cmd_group = vim.api.nvim_create_augroup("autocmds", { clear = true })
+
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	pattern = "*",
+	callback = function()
+		-- skip if a pop up window
+		if vim.fn.win_gettype() == "popup" then
+			return
+		end
+
+		-- skip if new buffer
+		if vim.bo.filetype == "" then
+			return
+		end
+
+		-- Skip if there is only one window
+		local win_list = vim.api.nvim_tabpage_list_wins(0)
+		if #win_list == 1 then
+			-- TODO: Remove winbar from the remaining window
+			return
+		else
+			-- Add winbar to all windows in tabpage
+			for _, win_id in ipairs(win_list) do
+				vim.api.nvim_set_option_value("winbar", "%m %f", { win = win_id })
+			end
+			return
+		end
+
+		-- vim.api.nvim_set_option_value("winbar", "", { win = "win_id" })
+		-- vim.fn.getwininfo(win_id)
+		-- vim.fn.bufnr()
+		-- vim.api.nvim_win_get_number(0)
+		-- vim.api.nvim_win_get_config(0)
+		-- vim.api.nvim_win_list_bufs()
+		-- vim.api.nvim_win_get_buf(0)
+		-- vim.api.nvim_buf_is_valid(0)
+		-- vim.api.nvim_buf_is_loaded(0)
+		-- vim.wo.winbar = "%m %f"
+	end,
+	group = cmd_group,
+})
