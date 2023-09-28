@@ -324,6 +324,7 @@ vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { noremap = true,
 vim.keymap.set("n", "<leader>fg", ":Telescope live_grep<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>fd", ":Telescope diagnostics<CR>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>gd", ":lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>gh", ":lua vim.lsp.buf.hover()<CR>", { noremap = true, silent = true })
@@ -344,6 +345,9 @@ vim.keymap.set(
 	":lua require('telescope.builtin').lsp_implementations()<CR>",
 	{ noremap = true, silent = true }
 )
+vim.keymap.set("n", "<leader>snd", ":lua vim.diagnostic.goto_next()<CR>", { silent = true })
+-- "nnoremap <leader>vn :lua vim.lsp.diagnostic.goto_next()<CR>
+-- "nnoremap <leader>vsd :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
 
 -- Center highlighted word
 vim.keymap.set("n", "G", "Gzz", {})
