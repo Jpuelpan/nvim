@@ -51,7 +51,7 @@ vim.opt.background = "dark"
 vim.opt.colorcolumn = "80"
 vim.opt.signcolumn = "yes:1"
 vim.opt.laststatus = 3
-vim.opt.winbar = "%m %f"
+-- vim.opt.winbar = "%m %f"
 
 vim.opt.backupdir = ".backups"
 vim.opt.undodir = ".undo"
@@ -66,222 +66,222 @@ vim.g.mapleader = " "
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable", -- latest stable release
+		lazypath,
+	})
 end
 vim.opt.rtp:prepend(lazypath)
 
 -- Plugins
 require("lazy").setup({
-  "tpope/vim-fugitive",
+	"tpope/vim-fugitive",
 
-  "nvim-lua/plenary.nvim",
-  "nvim-treesitter/nvim-treesitter",
+	"nvim-lua/plenary.nvim",
+	"nvim-treesitter/nvim-treesitter",
 
-  "neovim/nvim-lspconfig",
-  "hrsh7th/nvim-cmp",
-  "hrsh7th/cmp-nvim-lsp",
-  "hrsh7th/cmp-buffer",
-  "hrsh7th/cmp-path",
-  "hrsh7th/cmp-cmdline",
-  "hrsh7th/cmp-calc",
-  "hrsh7th/cmp-nvim-lsp-signature-help",
-  "L3MON4D3/LuaSnip",
-  "saadparwaiz1/cmp_luasnip",
-  "rafamadriz/friendly-snippets",
-  "JoosepAlviste/nvim-ts-context-commentstring",
-  "morhetz/gruvbox",
-  "jose-elias-alvarez/null-ls.nvim",
+	"neovim/nvim-lspconfig",
+	"hrsh7th/nvim-cmp",
+	"hrsh7th/cmp-nvim-lsp",
+	"hrsh7th/cmp-buffer",
+	"hrsh7th/cmp-path",
+	"hrsh7th/cmp-cmdline",
+	"hrsh7th/cmp-calc",
+	"hrsh7th/cmp-nvim-lsp-signature-help",
+	"L3MON4D3/LuaSnip",
+	"saadparwaiz1/cmp_luasnip",
+	"rafamadriz/friendly-snippets",
+	"JoosepAlviste/nvim-ts-context-commentstring",
+	"morhetz/gruvbox",
+	"jose-elias-alvarez/null-ls.nvim",
 
-  {
-    "ggandor/leap.nvim",
-    config = function()
-      require("leap").add_default_mappings()
-    end,
-  },
+	{
+		"ggandor/leap.nvim",
+		config = function()
+			require("leap").add_default_mappings()
+		end,
+	},
 
-  {
-    "numToStr/Comment.nvim",
-    lazy = false,
-    config = function()
-      require("Comment").setup({
-        padding = true,
-        sticky = true,
-        ignore = "^$",
+	{
+		"numToStr/Comment.nvim",
+		lazy = false,
+		config = function()
+			require("Comment").setup({
+				padding = true,
+				sticky = true,
+				ignore = "^$",
 
-        -- toggler = {
-        --   line = '<leader>cc', ---Line-comment toggle keymap
-        --   block = '<leader>bc', ---Block-comment toggle keymap
-        -- },
-        -- opleader = {
-        --   line = '<leader>c', ---Line-comment keymap
-        --   block = '<leader>b', ---Block-comment keymap
-        -- },
+				-- toggler = {
+				--   line = '<leader>cc', ---Line-comment toggle keymap
+				--   block = '<leader>bc', ---Block-comment toggle keymap
+				-- },
+				-- opleader = {
+				--   line = '<leader>c', ---Line-comment keymap
+				--   block = '<leader>b', ---Block-comment keymap
+				-- },
 
-        -- mappings = {
-        --   basic = true,
-        --   extra = true
-        -- },
+				-- mappings = {
+				--   basic = true,
+				--   extra = true
+				-- },
 
-        pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
-      })
-    end,
-  },
+				pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+			})
+		end,
+	},
 
-  {
-    "nvim-tree/nvim-tree.lua",
-    config = function()
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
-    end,
-  },
+	{
+		"nvim-tree/nvim-tree.lua",
+		config = function()
+			vim.g.loaded_netrw = 1
+			vim.g.loaded_netrwPlugin = 1
+		end,
+	},
 
-  {
-    "nvim-lualine/lualine.nvim",
-    config = function()
-      require("lualine").setup({
-        options = {
-          theme = "horizon",
-          icons_enabled = false,
-          section_separators = "",
-          component_separators = "|",
-          disabled_filetypes = {},
-          always_divide_middle = true,
-          globalstatus = true,
-        },
-        sections = {
-          lualine_a = { "mode" },
-          lualine_b = { "%f%m" },
-          lualine_c = {},
-          lualine_x = { "diagnostics", "branch", "encoding", "fileformat", "filetype" },
-          lualine_y = { "progress" },
-          lualine_z = { "location" },
-        },
-        inactive_sections = {
-          lualine_a = {},
-          lualine_b = { "%f%m" },
-          lualine_c = {},
-          lualine_x = { "filetype", "location" },
-          lualine_y = {},
-          lualine_z = {},
-        },
-        tabline = {},
-        extensions = {},
-      })
-    end,
-  },
+	{
+		"nvim-lualine/lualine.nvim",
+		config = function()
+			require("lualine").setup({
+				options = {
+					theme = "horizon",
+					icons_enabled = false,
+					section_separators = "",
+					component_separators = "|",
+					disabled_filetypes = {},
+					always_divide_middle = true,
+					globalstatus = true,
+				},
+				sections = {
+					lualine_a = { "mode" },
+					lualine_b = { "%f%m" },
+					lualine_c = {},
+					lualine_x = { "diagnostics", "branch", "encoding", "fileformat", "filetype" },
+					lualine_y = { "progress" },
+					lualine_z = { "location" },
+				},
+				inactive_sections = {
+					lualine_a = {},
+					lualine_b = { "%f%m" },
+					lualine_c = {},
+					lualine_x = { "filetype", "location" },
+					lualine_y = {},
+					lualine_z = {},
+				},
+				tabline = {},
+				extensions = {},
+			})
+		end,
+	},
 
-  {
-    "nvim-telescope/telescope.nvim",
-    dependencies = {
-      {
-        "nvim-telescope/telescope-live-grep-args.nvim",
-        version = "^1.0.0",
-      },
-    },
-    config = function()
-      local actions = require("telescope.actions")
-      local telescope = require("telescope")
+	{
+		"nvim-telescope/telescope.nvim",
+		dependencies = {
+			{
+				"nvim-telescope/telescope-live-grep-args.nvim",
+				version = "^1.0.0",
+			},
+		},
+		config = function()
+			local actions = require("telescope.actions")
+			local telescope = require("telescope")
 
-      telescope.load_extension("live_grep_args")
+			telescope.load_extension("live_grep_args")
 
-      telescope.setup({
-        defaults = {
-          --layout_config = {
-          --  vertical = { width = 0.5 }
-          --},
+			telescope.setup({
+				defaults = {
+					--layout_config = {
+					--  vertical = { width = 0.5 }
+					--},
 
-          file_ignore_patterns = { "node_modules" },
+					file_ignore_patterns = { "node_modules" },
 
-          mappings = {
-            i = {
-              ["<C-j>"] = actions.move_selection_next,
-              ["<C-k>"] = actions.move_selection_previous,
-              ["<esc>"] = actions.close,
-              ["<C-u>"] = false,
-            },
-          },
-        },
-      })
-    end,
-  },
+					mappings = {
+						i = {
+							["<C-j>"] = actions.move_selection_next,
+							["<C-k>"] = actions.move_selection_previous,
+							["<esc>"] = actions.close,
+							["<C-u>"] = false,
+						},
+					},
+				},
+			})
+		end,
+	},
 
-  {
-    "windwp/nvim-autopairs",
-    config = function()
-      require("nvim-autopairs").setup()
-    end,
-  },
+	{
+		"windwp/nvim-autopairs",
+		config = function()
+			require("nvim-autopairs").setup()
+		end,
+	},
 
-  {
-    "kylechui/nvim-surround",
-    event = "VeryLazy",
-    config = function()
-      require("nvim-surround").setup()
-    end,
-  },
+	{
+		"kylechui/nvim-surround",
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup()
+		end,
+	},
 
-  {
-    "folke/zen-mode.nvim",
-    config = function()
-      require("zen-mode").setup({
-        window = {
-          backdrop = 1, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-          -- height and width can be:
-          -- * an absolute number of cells when > 1
-          -- * a percentage of the width / height of the editor when <= 1
-          -- * a function that returns the width or the height
-          width = 80, -- width of the Zen window
-          height = 1, -- height of the Zen window
-          -- by default, no options are changed for the Zen window
-          -- uncomment any of the options below, or add other vim.wo options you want to apply
-          options = {
-            signcolumn = "no",      -- disable signcolumn
-            number = false,         -- disable number column
-            relativenumber = false, -- disable relative numbers
-            cursorcolumn = false,   -- disable cursor column
-            --cursorline = false, -- disable cursorline
-            colorcolumn = "",
-            list = false, -- disable whitespace characters
-            -- foldcolumn = "0", -- disable fold column
-          },
-        },
-        plugins = {
-          -- disable some global vim options (vim.o...)
-          -- comment the lines to not apply the options
-          options = {
-            enabled = true,
-            ruler = false,   -- disables the ruler text in the cmd line area
-            showcmd = false, -- disables the command in the last line of the screen
-          },
-          --twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
-          --gitsigns = { enabled = false }, -- disables git signs
-          tmux = { enabled = true }, -- disables the tmux statusline
-          -- this will change the font size on kitty when in zen mode
-          -- to make this work, you need to set the following kitty options:
-          -- - allow_remote_control socket-only
-          -- - listen_on unix:/tmp/kitty
-          -- this will change the font size on alacritty when in zen mode
-          -- requires  Alacritty Version 0.10.0 or higher
-          -- uses `alacritty msg` subcommand to change font size
-          --alacritty = {
-          --  enabled = true,
-          --  font = "11", -- font size
-          --},
-        },
-        -- callback where you can add custom code when the Zen window opens
-        on_open = function(_) end,
-        -- callback where you can add custom code when the Zen window closes
-        on_close = function() end,
-      })
-    end,
-  },
+	{
+		"folke/zen-mode.nvim",
+		config = function()
+			require("zen-mode").setup({
+				window = {
+					backdrop = 1, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+					-- height and width can be:
+					-- * an absolute number of cells when > 1
+					-- * a percentage of the width / height of the editor when <= 1
+					-- * a function that returns the width or the height
+					width = 80, -- width of the Zen window
+					height = 1, -- height of the Zen window
+					-- by default, no options are changed for the Zen window
+					-- uncomment any of the options below, or add other vim.wo options you want to apply
+					options = {
+						signcolumn = "no", -- disable signcolumn
+						number = false, -- disable number column
+						relativenumber = false, -- disable relative numbers
+						cursorcolumn = false, -- disable cursor column
+						--cursorline = false, -- disable cursorline
+						colorcolumn = "",
+						list = false, -- disable whitespace characters
+						-- foldcolumn = "0", -- disable fold column
+					},
+				},
+				plugins = {
+					-- disable some global vim options (vim.o...)
+					-- comment the lines to not apply the options
+					options = {
+						enabled = true,
+						ruler = false, -- disables the ruler text in the cmd line area
+						showcmd = false, -- disables the command in the last line of the screen
+					},
+					--twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
+					--gitsigns = { enabled = false }, -- disables git signs
+					tmux = { enabled = true }, -- disables the tmux statusline
+					-- this will change the font size on kitty when in zen mode
+					-- to make this work, you need to set the following kitty options:
+					-- - allow_remote_control socket-only
+					-- - listen_on unix:/tmp/kitty
+					-- this will change the font size on alacritty when in zen mode
+					-- requires  Alacritty Version 0.10.0 or higher
+					-- uses `alacritty msg` subcommand to change font size
+					--alacritty = {
+					--  enabled = true,
+					--  font = "11", -- font size
+					--},
+				},
+				-- callback where you can add custom code when the Zen window opens
+				on_open = function(_) end,
+				-- callback where you can add custom code when the Zen window closes
+				on_close = function() end,
+			})
+		end,
+	},
 })
 
 vim.cmd([[colorscheme gruvbox]])
@@ -339,16 +339,16 @@ vim.keymap.set("n", "<leader>rn", ":lua vim.lsp.buf.rename()<CR>", { noremap = t
 vim.keymap.set("n", "<leader>d", ":lua vim.diagnostic.open_float()<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>f", ":lua vim.lsp.buf.format()<CR>", { noremap = true, silent = true })
 vim.keymap.set(
-  "n",
-  "<leader>grr",
-  ":lua require('telescope.builtin').lsp_references()<CR>",
-  { noremap = true, silent = true }
+	"n",
+	"<leader>grr",
+	":lua require('telescope.builtin').lsp_references()<CR>",
+	{ noremap = true, silent = true }
 )
 vim.keymap.set(
-  "n",
-  "<leader>gi",
-  ":lua require('telescope.builtin').lsp_implementations()<CR>",
-  { noremap = true, silent = true }
+	"n",
+	"<leader>gi",
+	":lua require('telescope.builtin').lsp_implementations()<CR>",
+	{ noremap = true, silent = true }
 )
 
 -- Center highlighted word
@@ -376,36 +376,44 @@ vim.keymap.set("n", "tn", ":tabnew<CR>", { noremap = true, silent = true })
 -- Nvim tree
 vim.keymap.set("", "<c-e>", ":NvimTreeFindFileToggle<CR>", { silent = true })
 
-local cmd_group =
-    vim.api.nvim_create_augroup('autocmds', { clear = true })
+local cmd_group = vim.api.nvim_create_augroup("autocmds", { clear = true })
 
-vim.api.nvim_create_autocmd('BufWinEnter', {
-  pattern = '*',
-  callback = function()
-    -- skip if a pop up window
-    if vim.fn.win_gettype() == 'popup' then
-      return
-    end
+vim.api.nvim_create_autocmd("BufWinEnter", {
+	pattern = "*",
+	callback = function()
+		-- skip if a pop up window
+		if vim.fn.win_gettype() == "popup" then
+			return
+		end
 
-    -- skip if new buffer
-    if vim.bo.filetype == '' then
-      return
-    end
+		-- skip if new buffer
+		if vim.bo.filetype == "" then
+			return
+		end
 
-    -- vim.fn.getwininfo()
+		-- Skip if there is only one window
+		local win_list = vim.api.nvim_tabpage_list_wins(0)
+		if #win_list == 1 then
+			-- TODO: Remove winbar from the remaining window
+			return
+		else
+			-- Add winbar to all windows in tabpage
+			for _, win_id in ipairs(win_list) do
+				vim.api.nvim_set_option_value("winbar", "%m %f", { win = win_id })
+			end
+			return
+		end
 
-    local win_id = vim.api.nvim_win_get_number()
-    local info = vim.api.getwininfo(win_id)
-    print("=====HAHAHAHHAHAHAHAHAHHA")
-    print(vim.inspect(info))
-    print("=====HAHAHAHHAHAHAHAHAHHA")
-
-    -- if vim.getwininfo(win_id) == 0 then
-    --   print()
-    --   -- return
-    -- end
-
-    vim.wo.winbar = "%m %f"
-  end,
-  group = cmd_group,
+		-- vim.api.nvim_set_option_value("winbar", "", { win = "win_id" })
+		-- vim.fn.getwininfo(win_id)
+		-- vim.fn.bufnr()
+		-- vim.api.nvim_win_get_number(0)
+		-- vim.api.nvim_win_get_config(0)
+		-- vim.api.nvim_win_list_bufs()
+		-- vim.api.nvim_win_get_buf(0)
+		-- vim.api.nvim_buf_is_valid(0)
+		-- vim.api.nvim_buf_is_loaded(0)
+		-- vim.wo.winbar = "%m %f"
+	end,
+	group = cmd_group,
 })
