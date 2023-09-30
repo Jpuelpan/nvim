@@ -40,8 +40,11 @@ vim.opt.scrolloff = 0
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
-vim.opt.foldmethod = "indent"
+-- vim.opt.foldmethod = "indent"
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
+
 vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -294,6 +297,7 @@ vim.cmd("highligh LspReferenceRead ctermbg=237 guibg=#303030")
 vim.cmd("highligh LspReferenceText ctermbg=237 guibg=#303030")
 vim.cmd("highligh LspReferenceWrite ctermbg=237 guibg=#303030")
 vim.cmd("highligh DiagnosticError ctermfg=1 guifg=#f87171")
+vim.cmd("highlight ZenBg guibg=default")
 
 -- Inactive buffer winbar
 vim.cmd("highligh WinBarNC guifg=#ffffff guibg=default")
@@ -421,3 +425,5 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
 	end,
 	group = cmd_group,
 })
+
+vim.api.nvim_create_autocmd({ "BufEnter" }, { pattern = { "*" }, command = "normal zx" })
