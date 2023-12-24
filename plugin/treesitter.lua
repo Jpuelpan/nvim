@@ -13,9 +13,4 @@ require("nvim-treesitter.configs").setup({
 	indent = {
 		enable = true,
 	},
-
-	-- indent = {
-	-- 	enable = true,
-	-- 	disable = { "javascript", "typescriptreact", "rust", "python" },
-	-- },
 })

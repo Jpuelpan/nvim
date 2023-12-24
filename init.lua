@@ -36,13 +36,13 @@ vim.opt.shortmess = { a = true, t = true, I = true }
 vim.opt.showmode = true
 vim.opt.title = true
 vim.opt.showcmd = true
-vim.opt.scrolloff = 0
+vim.opt.scrolloff = 5
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
--- vim.opt.foldmethod = "indent"
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldmethod = "indent"
+-- vim.opt.foldmethod = "expr"
+-- vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
 
 vim.opt.termguicolors = true
@@ -82,11 +82,10 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Plugins
 require("lazy").setup({
-	"tpope/vim-fugitive",
-
 	"nvim-lua/plenary.nvim",
 	"nvim-treesitter/nvim-treesitter",
 
+	"tpope/vim-fugitive",
 	"neovim/nvim-lspconfig",
 	"hrsh7th/nvim-cmp",
 	"hrsh7th/cmp-nvim-lsp",
@@ -335,6 +334,7 @@ vim.keymap.set("n", "<leader>fg", ":Telescope live_grep<CR>", { noremap = true, 
 vim.keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>fd", ":Telescope diagnostics<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>bc", ":Telescope git_bcommits<CR>", { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>gd", ":lua vim.lsp.buf.definition()<CR>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>gh", ":lua vim.lsp.buf.hover()<CR>", { noremap = true, silent = true })
