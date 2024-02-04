@@ -126,7 +126,20 @@ nvim_lsp.pyright.setup({
 	on_attach = on_attach,
 })
 
-nvim_lsp.ruff_lsp.setup({})
+nvim_lsp.ruff_lsp.setup({
+	capabilities = capabilities,
+	on_attach = function(client, bufnr)
+		-- Disable hover in favor of Pyright
+		client.server_capabilities.hoverProvider = false
+	end,
+})
+
+-- require("lspconfig").ruff_lsp.setup({
+-- 	on_attach = function(client, bufnr)
+-- 		-- Disable hover in favor of Pyright
+-- 		client.server_capabilities.hoverProvider = false
+-- 	end,
+-- })
 
 nvim_lsp.clangd.setup({
 	capabilities = capabilities,
@@ -160,8 +173,15 @@ null_ls.setup({
 	end,
 
 	sources = {
-		formatting.autopep8,
+		-- formatting.autopep8,
+		formatting.ruff,
 		formatting.rustfmt,
+
+		null_ls.builtins.diagnostics.ruff,
+
+		-- sources = {
+		-- 	require("null-ls").builtins.diagnostics.ruff,
+		-- },
 
 		formatting.prettierd.with({
 			extra_filetypes = { "prisma", "typescript", "typescriptreact" },
